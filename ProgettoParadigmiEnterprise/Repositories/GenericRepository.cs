@@ -4,7 +4,7 @@ namespace ProgettoParadigmiEnterprise.Repositories
 {
     public abstract class GenericRepository<T> where T : class
     {
-        DatabaseRistorante context { get; set; }
+        protected DatabaseRistorante context { get; set; }
 
         public GenericRepository(DatabaseRistorante _context)
         {
