@@ -12,6 +12,7 @@ builder.Services.AddSwaggerGen();
 // cccc
 builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddModelServices(builder.Configuration);
+builder.Services.AddWebServices(builder.Configuration);
 
 var app = builder.Build();
 

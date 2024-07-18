@@ -8,10 +8,11 @@ namespace ProgettoParadigmiEnterprise.Services
     public class UtenteService : IUtenteService
     {
         private readonly UtenteRepository utenteRepository;
-
-        public UtenteService(UtenteRepository _utenteRepository)
+        private readonly JwtTokenService jwtTokenService;
+        public UtenteService(UtenteRepository _utenteRepository, JwtTokenService _jwtTokenService)
         {
             utenteRepository = _utenteRepository;
+            jwtTokenService = _jwtTokenService;
         }
 
         public bool Registra(string _email, string _password, string _nome, string _cognome)
@@ -26,7 +27,7 @@ namespace ProgettoParadigmiEnterprise.Services
         public string Accedi(string _email, string _password)
         {
             if (utenteRepository.CheckPasswordCorretta(_password, _email))
-                return "Credenziali corrette";
+                return jwtTokenService.GenerateToken(utenteRepository.GetUtenteByEmail(_email));
             else return null;
         }
     }
