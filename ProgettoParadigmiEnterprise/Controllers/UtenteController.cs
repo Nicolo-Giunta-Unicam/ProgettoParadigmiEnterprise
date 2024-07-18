@@ -20,8 +20,8 @@ namespace ProgettoParadigmiEnterprise.Controllers
         public IActionResult Registrazione([FromBody] RegistrazioneRequest request)
         {
             if(utenteService.Registra(request.email, request.password, request.nome, request.cognome))
-                return Ok();
-            else return BadRequest();
+                return Ok("Registrazione Effettuata");
+            else return BadRequest("Registrazione Fallita");
         }
 
         [HttpPost]
@@ -29,8 +29,8 @@ namespace ProgettoParadigmiEnterprise.Controllers
         public IActionResult Accesso([FromBody] AccessoRequest request)
         {
             if (utenteService.Accedi(request.email, request.password) != null)
-                return Ok();
-            else return BadRequest();
+                return Ok("Accesso Effettuato");
+            else return BadRequest("Accesso Fallito");
         }
     }
 }

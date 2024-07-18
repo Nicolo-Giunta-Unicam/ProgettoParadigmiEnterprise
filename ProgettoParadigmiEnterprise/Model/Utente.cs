@@ -21,6 +21,7 @@ namespace ProgettoParadigmiEnterprise.Model
             this.password = password;
             this.ruolo = ruolo;
         }
+
     }
 
     public enum Ruolo
