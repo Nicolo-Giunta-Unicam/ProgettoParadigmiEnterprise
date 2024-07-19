@@ -30,8 +30,9 @@ namespace ProgettoParadigmiEnterprise.Controllers
         [Route("accesso")]
         public IActionResult Accesso([FromBody] AccessoRequest request)
         {
-            if (utenteService.Accedi(request.email, PasswordEncrypter.EncryptPassword(request.password)) != null)
-                return Ok("Accesso Effettuato");
+            string token = utenteService.Accedi(request.email, PasswordEncrypter.EncryptPassword(request.password));
+            if (token != null)
+                return Ok("Accesso Effettuato "+token);
             else return BadRequest("Accesso Fallito");
         }
 

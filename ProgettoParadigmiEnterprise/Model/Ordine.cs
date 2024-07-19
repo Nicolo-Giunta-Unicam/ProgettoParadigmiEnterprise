@@ -12,5 +12,15 @@ namespace ProgettoParadigmiEnterprise.Model
         public DateTime data {  get; set; }
         public string indirizzo { get; set; }
         public ICollection<Portata> portata { get; set; }
+
+        public Ordine(string emailUtente, DateTime data, string indirizzo, ICollection<Portata> portata)
+        {
+            this.emailUtente = emailUtente;
+            this.data = data;
+            this.indirizzo = indirizzo;
+            this.portata = portata;
+        }
+
+        public Ordine() { }
     }
 }
