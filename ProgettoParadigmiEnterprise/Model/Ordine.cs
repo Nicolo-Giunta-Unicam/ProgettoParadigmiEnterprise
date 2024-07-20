@@ -11,14 +11,14 @@ namespace ProgettoParadigmiEnterprise.Model
         public string emailUtente { get; set; }
         public DateTime data {  get; set; }
         public string indirizzo { get; set; }
-        public ICollection<Portata> portata { get; set; }
+        public virtual ICollection<Portata> portate { get; set; } = new HashSet<Portata>();
 
-        public Ordine(string emailUtente, DateTime data, string indirizzo, ICollection<Portata> portata)
+        public Ordine(string emailUtente, DateTime data, string indirizzo, ICollection<Portata> portate)
         {
             this.emailUtente = emailUtente;
             this.data = data;
             this.indirizzo = indirizzo;
-            this.portata = portata;
+            this.portate = portate;
         }
 
         public Ordine() { }

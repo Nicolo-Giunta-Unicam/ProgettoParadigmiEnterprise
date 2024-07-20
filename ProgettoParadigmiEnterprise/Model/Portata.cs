@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace ProgettoParadigmiEnterprise.Model
 {
@@ -7,11 +8,12 @@ namespace ProgettoParadigmiEnterprise.Model
     public class Portata
     {
         [Key]
-        public Guid id;
+        public int id;
         public String nome { get; set; }
         public double prezzo { get; set; }
         public TipologiaPortata tipologia { get; set; }
-
+        [JsonIgnore]
+        public virtual IEnumerable<Ordine> ordini { get; set; } = new HashSet<Ordine>();
         public Portata(string nome, double prezzo, TipologiaPortata tipologia)
         {
             this.nome = nome;
