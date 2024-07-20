@@ -2,7 +2,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProgettoParadigmiEnterprise.Abstractions;
+using ProgettoParadigmiEnterprise.Model;
 using ProgettoParadigmiEnterprise.Requests;
+using ProgettoParadigmiEnterprise.Responses;
+using ProgettoParadigmiEnterprise.Utility;
 using System.Security.Claims;
 
 namespace ProgettoParadigmiEnterprise.Controllers
@@ -23,8 +26,8 @@ namespace ProgettoParadigmiEnterprise.Controllers
         [Route("creaOrdine")]
         public IActionResult CreaOrdine([FromBody] CreaOrdineRequest request)
         {
-            ordineService.CreaOrdine(GetEmailUtente(), request.indirizzo, request.portate);
-            return Ok("Ordine Creato");
+            Ordine ordine = ordineService.CreaOrdine(GetEmailUtente(), request.indirizzo, request.portate);
+            return Ok(new CreaOrdineResponse(ordine.numero, CalcolatorePrezzoOrdine.CalcolaTotale(ordine)));
         }
 
         private string GetEmailUtente() => User.FindFirst(ClaimTypes.Email).Value;

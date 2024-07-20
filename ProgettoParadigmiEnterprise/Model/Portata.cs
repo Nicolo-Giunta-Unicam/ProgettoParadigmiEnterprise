@@ -10,11 +10,11 @@ namespace ProgettoParadigmiEnterprise.Model
         [Key]
         public int id;
         public String nome { get; set; }
-        public double prezzo { get; set; }
+        public decimal prezzo { get; set; }
         public TipologiaPortata tipologia { get; set; }
         [JsonIgnore]
         public virtual IEnumerable<Ordine> ordini { get; set; } = new HashSet<Ordine>();
-        public Portata(string nome, double prezzo, TipologiaPortata tipologia)
+        public Portata(string nome, decimal prezzo, TipologiaPortata tipologia)
         {
             this.nome = nome;
             this.prezzo = prezzo;
