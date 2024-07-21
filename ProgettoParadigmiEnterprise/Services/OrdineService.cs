@@ -19,5 +19,10 @@ namespace ProgettoParadigmiEnterprise.Services
             ordineRepository.Save(); 
             return ordine;
         }
+
+        public List<Ordine> GetAllOrdini() => (List<Ordine>)ordineRepository.GetAll();
+
+        public List<Ordine> GetOrdiniByUtente(string _emailUtente) => (List<Ordine>)ordineRepository.GetOrdiniByUtente(_emailUtente);
+        
     }
 }

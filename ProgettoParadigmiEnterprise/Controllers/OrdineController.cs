@@ -30,6 +30,17 @@ namespace ProgettoParadigmiEnterprise.Controllers
             return Ok(new CreaOrdineResponse(ordine.numero, CalcolatorePrezzoOrdine.CalcolaTotale(ordine)));
         }
 
+        [HttpGet]
+        [Route("vediStorico")]
+        public IActionResult VediStoricoOrdini(DateOnly dataInizio, DateOnly dataFine, string emailUtente = null)
+        {
+            string utente = emailUtente==null ? GetEmailUtente() : emailUtente;
+            if (GetRuoloUtente() == Ruolo.Amministratore.ToString())
+                return Ok(ordineService.GetAllOrdini());
+            return Ok(ordineService.GetOrdiniByUtente(utente));
+        }
+
         private string GetEmailUtente() => User.FindFirst(ClaimTypes.Email).Value;
+        private string GetRuoloUtente() => User.FindFirst(ClaimTypes.Role).Value;
     }
 }

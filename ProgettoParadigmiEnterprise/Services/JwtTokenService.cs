@@ -23,6 +23,7 @@ namespace ProgettoParadigmiEnterprise.Services
             {
                 new Claim(ClaimTypes.Name, _utente.nome),
                 new Claim(ClaimTypes.Email, _utente.email),
+                new Claim(ClaimTypes.Role, _utente.ruolo.ToString())
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtAuthenticationOption.Key));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
