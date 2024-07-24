@@ -8,7 +8,7 @@ namespace ProgettoParadigmiEnterprise.Model
     public class Portata
     {
         [Key]
-        public int id;
+        public int id { get; }
         public String nome { get; set; }
         public decimal prezzo { get; set; }
         public TipologiaPortata tipologia { get; set; }

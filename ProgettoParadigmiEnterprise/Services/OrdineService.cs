@@ -1,4 +1,5 @@
-﻿using ProgettoParadigmiEnterprise.Abstractions;
+﻿using Microsoft.EntityFrameworkCore;
+using ProgettoParadigmiEnterprise.Abstractions;
 using ProgettoParadigmiEnterprise.Model;
 using ProgettoParadigmiEnterprise.Repositories;
 
@@ -16,7 +17,7 @@ namespace ProgettoParadigmiEnterprise.Services
         {
             Ordine ordine = new Ordine(_emailUtente, DateTime.Now, _indirizzo, _portate);
             ordineRepository.Add(ordine);
-            ordineRepository.Save(); 
+            ordineRepository.Save();
             return ordine;
         }
 

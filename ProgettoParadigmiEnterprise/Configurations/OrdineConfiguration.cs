@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProgettoParadigmiEnterprise.Model;
+using System.Reflection.Emit;
 
 namespace ProgettoParadigmiEnterprise.Configurations
 {
@@ -14,7 +15,19 @@ namespace ProgettoParadigmiEnterprise.Configurations
             "PortateOrdine",
             l => l.HasOne(typeof(Portata)).WithMany().HasForeignKey("idPortata").HasPrincipalKey(nameof(Portata.id)),
             r => r.HasOne(typeof(Ordine)).WithMany().HasForeignKey("numeroOrdine").HasPrincipalKey(nameof(Ordine.numero)),
-            j => j.HasKey("idPortata", "numeroOrdine"));
+            /*j =>
+            {
+                j.HasKey("idPortata", "numeroOrdine");
+                j.Property<int>("quantita");
+            });*/
+            //j => j.HasKey("idPortata", "numeroOrdine", "id"));
+            //j => j.HasKey("id"));
+            j =>
+            {
+                j.Property<int>("id").ValueGeneratedOnAdd(); // ID incrementale per la tabella di join
+                j.HasKey("id");
+                
+            }) ;
         }
     }
 }

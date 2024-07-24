@@ -16,17 +16,20 @@ namespace ProgettoParadigmiEnterprise.Controllers
     public class OrdineController : ControllerBase
 	{
         private readonly IOrdineService ordineService;
+        private readonly IPortataService portataService;
 
-		public OrdineController(IOrdineService _ordineService)
+		public OrdineController(IOrdineService _ordineService, IPortataService _portataService)
         {
             ordineService = _ordineService;
+            portataService = _portataService;
         }
 
         [HttpPost]
         [Route("creaOrdine")]
         public IActionResult CreaOrdine([FromBody] CreaOrdineRequest request)
         {
-            Ordine ordine = ordineService.CreaOrdine(GetEmailUtente(), request.indirizzo, request.portate);
+            List<Portata> portate = portataService.GetPortateById(request.portate);
+            Ordine ordine = ordineService.CreaOrdine(GetEmailUtente(), request.indirizzo, portate);
             return Ok(new CreaOrdineResponse(ordine.numero, CalcolatorePrezzoOrdine.CalcolaTotale(ordine)));
         }
 
@@ -34,10 +37,16 @@ namespace ProgettoParadigmiEnterprise.Controllers
         [Route("vediStorico")]
         public IActionResult VediStoricoOrdini(DateOnly dataInizio, DateOnly dataFine, string emailUtente = null)
         {
-            string utente = emailUtente==null ? GetEmailUtente() : emailUtente;
+            /*string utente = emailUtente==null ? GetEmailUtente() : emailUtente;
             if (GetRuoloUtente() == Ruolo.Amministratore.ToString())
                 return Ok(ordineService.GetAllOrdini());
-            return Ok(ordineService.GetOrdiniByUtente(utente));
+            return Ok(ordineService.GetOrdiniByUtente(utente));*/
+
+            if (GetRuoloUtente() == Ruolo.Amministratore.ToString())
+                if (emailUtente == null)
+                    return Ok(ordineService.GetAllOrdini());
+                else return Ok(ordineService.GetOrdiniByUtente(emailUtente));
+            return Ok(ordineService.GetOrdiniByUtente(GetEmailUtente()));
         }
 
         private string GetEmailUtente() => User.FindFirst(ClaimTypes.Email).Value;

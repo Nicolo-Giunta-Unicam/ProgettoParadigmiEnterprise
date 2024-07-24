@@ -37,6 +37,12 @@ namespace ProgettoParadigmiEnterprise.Extensions
             services.AddScoped<IPortataService, PortataService>();
             services.AddScoped<IUtenteService, UtenteService>();
             services.AddScoped<IJwtTokenService, JwtTokenService>();
+            // Per far si che gli enum siano visualizzati tramite la loro etichetta e non il valore intero
+            services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
+            });
+
             return services;
         }
 

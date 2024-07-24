@@ -19,5 +19,12 @@ namespace ProgettoParadigmiEnterprise.Services
             return portata;
         }
         public List<Portata> GetAllPortate() => (List<Portata>)portataRepository.GetAll();
+
+        public List<Portata> GetPortateById(List<int> _portate)
+        {
+            List<Portata> portate = new List<Portata>();
+            foreach (int id in _portate) portate.Add(portataRepository.Get(id));
+            return portate;
+        }
     }
 }
