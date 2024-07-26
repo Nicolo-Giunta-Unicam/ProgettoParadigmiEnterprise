@@ -7,9 +7,9 @@ namespace ProgettoParadigmiEnterprise.Repositories
     public class OrdineRepository : GenericRepository<Ordine>
     {
         public OrdineRepository(DatabaseRistorante _context) : base(_context) { }
-        public IEnumerable<Ordine> GetOrdiniByUtente(string _email) => context.ordini.Include(o => o.portate).Where(o => o.emailUtente == _email).ToList();
-        public new IEnumerable<Ordine> GetAll() => context.ordini.Include(o => o.portate).ToList();
-        
+        public IEnumerable<Ordine> GetOrdiniByUtente(string _email) => CaricaPortatePerOrdini(context.ordini.Where(o => o.emailUtente == _email).ToList());
+        public new IEnumerable<Ordine> GetAll() => CaricaPortatePerOrdini(context.ordini.ToList());
+
         public new void Add(Ordine _ordine)
         {
             base.Add(_ordine);
@@ -30,6 +30,13 @@ namespace ProgettoParadigmiEnterprise.Repositories
                     context.Set<Dictionary<string, object>>("PortateOrdine").Add(portateOrdine);
                 }
             }
+        }
+
+        List<Ordine> CaricaPortatePerOrdini(List<Ordine> _ordini)
+        {
+            foreach (var ordine in _ordini)
+                ordine.portate = context.portate.FromSqlRaw($"SELECT p.* FROM PortateOrdine po LEFT JOIN Portate p ON po.idPortata = p.id WHERE po.numeroOrdine = {ordine.numero}").ToList();
+            return _ordini;
         }
     }
 }
