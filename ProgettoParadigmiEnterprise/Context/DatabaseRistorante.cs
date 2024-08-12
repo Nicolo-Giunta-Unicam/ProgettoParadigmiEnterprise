@@ -20,12 +20,5 @@ namespace ProgettoParadigmiEnterprise.Context
             base.OnModelCreating(modelBuilder);
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Server=NICOLÒ-GIUNTA\\SQLEXPRESS;Database=Paradigmi;User Id=admin;Password=admin;Encrypt=True;TrustServerCertificate=True;Trusted_Connection=True");
-            base.OnConfiguring(optionsBuilder);
-            
-
-        }
     }
 }

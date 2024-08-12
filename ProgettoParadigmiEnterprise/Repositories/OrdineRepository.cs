@@ -7,9 +7,17 @@ namespace ProgettoParadigmiEnterprise.Repositories
     public class OrdineRepository : GenericRepository<Ordine>
     {
         public OrdineRepository(DatabaseRistorante _context) : base(_context) { }
+        /// <summary>
+        /// Restituisce tutti gli ordini con relative portate di un dato utente
+        /// </summary>
         public IEnumerable<Ordine> GetOrdiniByUtente(string _email) => CaricaPortatePerOrdini(context.ordini.Where(o => o.emailUtente == _email).ToList());
+        /// <summary>
+        /// Restituisce tutti gli ordini con relative portate di tutti gli utenti
+        /// </summary>
         public new IEnumerable<Ordine> GetAll() => CaricaPortatePerOrdini(context.ordini.ToList());
-
+        /// <summary>
+        /// Aggiunge un nuovo ordine al database
+        /// </summary>
         public new void Add(Ordine _ordine)
         {
             base.Add(_ordine);
@@ -31,7 +39,9 @@ namespace ProgettoParadigmiEnterprise.Repositories
                 }
             }
         }
-
+        /// <summary>
+        /// Carica in ognuno degli ordini passati le relative portate con le rispettive informazioni
+        /// </summary>
         List<Ordine> CaricaPortatePerOrdini(List<Ordine> _ordini)
         {
             foreach (var ordine in _ordini)

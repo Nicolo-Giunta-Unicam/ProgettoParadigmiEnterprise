@@ -16,7 +16,10 @@ namespace ProgettoParadigmiEnterprise.Controllers
         {
             utenteService = _utenteService;
         }
-
+        /// <summary>
+        /// Effettua la registrazione
+        /// </summary>
+        /// <param name="request">Una richiesta contenente le informazioni di un utente non ancora registrato</param>
         [HttpPost]
         [Route("registrazione")]
         public IActionResult Registrazione([FromBody] RegistrazioneRequest request)
@@ -25,7 +28,11 @@ namespace ProgettoParadigmiEnterprise.Controllers
                 return Ok("Registrazione Effettuata");
             else return BadRequest("Registrazione Fallita");
         }
-
+        /// <summary>
+        /// Effettua l'accesso
+        /// </summary>
+        /// <param name="request">Richiesta contenente la mail e la password di un utente già registrato</param>
+        /// <returns>In caso di successo restituisce il token JWT per l'autorizzazione</returns>
         [HttpPost]
         [Route("accesso")]
         public IActionResult Accesso([FromBody] AccessoRequest request)

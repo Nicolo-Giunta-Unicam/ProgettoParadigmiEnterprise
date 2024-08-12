@@ -18,8 +18,8 @@ namespace ProgettoParadigmiEnterprise.Extensions
         public static IServiceCollection AddModelServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<DatabaseRistorante>(conf =>
-            {
-                conf.UseSqlServer(configuration.GetConnectionString("Paradigmi"));
+            {  // Imposto la connection string presa da appsettings.json
+                conf.UseSqlServer(configuration.GetConnectionString("DatabaseRistorante")); 
             });
             services.AddScoped<OrdineRepository>();
             services.AddScoped<PortataRepository>();
@@ -66,16 +66,15 @@ namespace ProgettoParadigmiEnterprise.Extensions
                     Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 1safsfsdfdfd\"",
                 });
                 c.AddSecurityRequirement(new OpenApiSecurityRequirement {
-        {
-            new OpenApiSecurityScheme {
-                Reference = new OpenApiReference {
-                    Type = ReferenceType.SecurityScheme,
-                        Id = "Bearer"
-                }
-            },
-            new string[] {}
-        }
-    });
+                {
+                    new OpenApiSecurityScheme {
+                        Reference = new OpenApiReference {
+                            Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                        }
+                    },
+                    new string[] {}
+                }});
             });
 
             services.AddFluentValidationAutoValidation();

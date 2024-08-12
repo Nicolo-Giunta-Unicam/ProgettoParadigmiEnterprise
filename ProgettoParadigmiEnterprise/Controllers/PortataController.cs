@@ -18,6 +18,9 @@ namespace ProgettoParadigmiEnterprise.Controllers
         {
             portataService = _portataService;
         }
+        /// <summary>
+        /// Se richiamata da un amministratore crea una nuova portata da aggiungere al menu
+        /// </summary>
         [HttpPost]
         [Route("creaPortata")]
         public IActionResult CreaPortata([FromBody] CreaPortataRequest request)
@@ -26,7 +29,9 @@ namespace ProgettoParadigmiEnterprise.Controllers
             Portata portata = portataService.CreaPortata(request.nome, request.prezzo, request.tipologia);
             return Ok("Portata creata con id: "+ portata.id);
         }
-
+        /// <summary>
+        /// Visualizza il menu completo con le portate e le rispettive informazioni
+        /// </summary>
         [HttpGet]
         [Route("vediMenu")]
         [AllowAnonymous]

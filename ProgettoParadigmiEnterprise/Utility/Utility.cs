@@ -4,6 +4,9 @@ namespace ProgettoParadigmiEnterprise.Utility
 {
     public class PasswordEncrypter
     {
+        /// <summary>
+        /// Restituisce la password criptata
+        /// </summary>
         public static string EncryptPassword(string _password)
         {
             byte[] data = System.Text.Encoding.ASCII.GetBytes(_password);
@@ -11,7 +14,9 @@ namespace ProgettoParadigmiEnterprise.Utility
             return System.Text.Encoding.ASCII.GetString(data);
         }
     }
-
+    /// <summary>
+    /// Classe per calcolare il prezzo di un ordine con l'applicazione di eventuali sconti
+    /// </summary>
     public class CalcolatorePrezzoOrdine
     {
         const decimal scontoPastoCompleto = 0.10m; // Sconto del 10%
