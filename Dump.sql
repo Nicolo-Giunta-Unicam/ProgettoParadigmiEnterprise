@@ -154,7 +154,7 @@ INSERT [dbo].[Portate] ([id], [nome], [prezzo], [tipologia]) VALUES (7, N'Tirami
 INSERT [dbo].[Portate] ([id], [nome], [prezzo], [tipologia]) VALUES (8, N'Cantucci con vino cotto', CAST(6.00 AS Decimal(5, 2)), 3)
 SET IDENTITY_INSERT [dbo].[Portate] OFF
 GO
-INSERT [dbo].[Utenti] ([email], [nome], [cognome], [password], [ruolo]) VALUES (N'admin@mail.com', N'admin', N'administrator', N'1234', 1)
+INSERT [dbo].[Utenti] ([email], [nome], [cognome], [password], [ruolo]) VALUES (N'admin@mail.com', N'admin', N'administrator', N'?gB??\v???U?g?6#????E??x??F?', 1)
 GO
 USE [master]
 GO
